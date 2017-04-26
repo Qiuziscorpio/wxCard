@@ -1,0 +1,93 @@
+/**app.wxss**/
+@import "iconfont/iconfont.wxss";
+
+page {
+  font-size: 14px;
+  color: #757575;
+  height: 100%;
+  background: #fafafa;
+}
+
+
+
+.container {
+  padding: 23rpx;
+}
+
+.main {
+  height: 100%;
+  padding: 23rpx;
+  background: #fafafa;
+}
+
+.gray {
+  color: #757575;
+}
+
+.gray3 {
+  color: #e0e0e0;
+}
+
+.gray4 {
+  color: #bdbdbd;
+}
+
+.green {
+  color: #72a92c;
+}
+
+.bg-gray2 {
+  background: #fafafa;
+}
+
+.btn-green {
+  color: #fff;
+  background: #72a92c;
+}
+
+.btn-white {
+  color: #757575;
+  background: #fff;
+  border: 1rpx solid #e0e0e0;
+}
+
+.btn-white::after {
+  border: 0;
+}
+
+.iconfont.f37 {
+  font-size: 37rpx;
+}
+
+.mb {
+  margin-bottom: 24rpx;
+}
+
+.card-inputlabel .card-input {
+  display: block;
+  text-overflow: clip;
+  white-space: nowrap;
+  line-height: 0;
+  font-family: UICTFontTextStyleBody;
+}
+
+swiper {
+  height: 100%;
+}
+
+.hint {
+  color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.text-samll {
+  font-size:13px;
+}
+
+.text-right {
+  text-align: right;
+  width: 100%;
+}

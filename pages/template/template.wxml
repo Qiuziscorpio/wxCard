@@ -1,0 +1,61 @@
+
+<!--pages/template/template.wxml-->
+<template name="card">
+  <view class="bg-gray2">
+    <navigator url="../carddetails/carddetails?id={{itemName.id}}" d hover-class="none" wx:key="{{itemName}}" wx:for="{{cardData}}" wx:for-index="index" wx:for-item="itemName">
+      <view class="card-item">
+        <view class="card-moren" wx:if="{{itemName.isDefault}}">
+          <text class="green iconfont icon-moren"></text>
+        </view>
+        <view class="card-head">
+          <view class="title">
+            <view class="name">{{itemName.name}}</view>
+            <view class="label">{{itemName.title}}</view>
+          </view>
+          <view class="sign">
+            <image src="{{itemName.avatarUrl}}" />
+          </view>
+        </view>
+        <view class="card-content">
+          <view class="phone">
+            <text wx:if="{{itemName.mobileVerify}}" class="iconfont icon-shoujiyanzheng green"></text>
+            <text wx:else class="gray iconfont icon-shoujiyanzheng "></text>
+            {{itemName.mobile}}
+          </view>
+          <view class="name ">
+
+            <!--<text wx:if="{{itemName.companyVerify}} " class="green iconfont icon-yanzheng "></text>-->
+
+            <!--<text wx:else class="iconfont icon-yanzheng "></text>-->
+            {{itemName.companyName}}
+          </view>
+          <view class="customcontent gray4" wx:if="{{itemName.more==''}}">
+            没有更多介绍
+          </view>
+          <view class="customcontent gray4" wx:else>
+            {{itemName.more}}
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</template>
+<template name="cardB">
+  <view class="bg-gray2">
+    <view class="cardB-item" wx:for="{{customData}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName">
+      <navigator url="../carddetails/carddetails?id={{itemName.id}}&type=1" class="cardB-mark">
+        <image src="{{itemName.avatarUrl}}"></image>
+      </navigator>
+      <navigator url="../carddetails/carddetails?id={{itemName.id}}&type=1" class="cardB-content">
+        <view class="name">{{itemName.name}}</view>
+        <view class="subtitle">{{itemName.companyName}}</view>
+      </navigator>
+      <view class="cardB-right">
+        <text wx:if="{{itemName.hasCollect}}">已添加</text>
+        <text wx:else class="btn" data-id="{{itemName.id}}" bindtap="collectCard">添加</text>
+      </view>
+    </view>
+    <view>
+    </view>
+  </view>
+</template>

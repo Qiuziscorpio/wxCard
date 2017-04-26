@@ -1,0 +1,81 @@
+/* pages/createcard/createcard.wxss */
+@import "../../iconfont/iconfont.wxss";
+
+.card-input {
+  border-bottom: 1rpx solid #e0e0e0;
+  padding: 23rpx 0;
+  font-size:14px;
+  width: 100%;
+}
+
+.card-input:last-child {
+  border: 0;
+}
+
+.card-inputlabel {
+  display: flex;
+}
+
+.card-inputlabel .label {
+  margin-right: 5rpx;
+  padding: 20rpx 0;
+  font-size: 14px;
+}
+
+.card-formitem {
+  background: #fff;
+  padding: 0 23rpx;
+  border-top: 1rpx solid #e0e0e0;
+  border-bottom: 1rpx solid #e0e0e0;
+  margin-top: 23rpx;
+}
+
+.card-formitem .card-user {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.card-user .eng {
+  position: absolute;
+  top: 0;
+  padding-top: 23rpx;
+  right: 0;
+  z-index: 999;
+}
+
+.card-user .eng .iconfont {
+  font-size: 48rpx;
+  color: #757575;
+}
+
+.card-user  .sign {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+  margin-right: 23rpx;
+  flex: 0 0 120rpx;
+}
+
+.card-user .sign image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+  border: 1rpx solid #e0e0e0;
+}
+
+.card-user .message {
+  flex: 1;
+}
+
+.card-user .btn-verify {
+  position: absolute;
+  z-index: 999;
+  right: 0;
+  bottom: 23rpx;
+  border: 1rpx solid #72a92c;
+  color: #72a92c;
+  border-radius: 5rpx;
+  padding: 6rpx 22rpx;
+  font-size:13px;
+}

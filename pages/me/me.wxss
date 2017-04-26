@@ -1,0 +1,66 @@
+/* pages/me/me.wxss */
+
+.item-group {
+  margin-top: 24rpx;
+}
+
+.item-group .item {
+  padding: 20rpx;
+  background: #fff;
+  border-top: 1rpx solid #e0e0e0;
+  border-bottom: 1rpx solid #e0e0e0;
+  font-size: 17px;
+  display: flex;
+
+}
+
+.item-group .item:nth-child(even) {
+  border-top: 0;
+}
+
+.item-user {
+  display: flex;
+
+}
+
+.item-user .sign {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+  margin-right: 23rpx;
+  flex: 0 0 120rpx;
+}
+
+.item-user image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+  border: 1rpx solid #e0e0e0;
+}
+
+.item-user .message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-user .name {
+  color: #212121;
+  font-size: 17px;
+}
+
+.item-user .message .number {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.item-user .message .btn-verify {
+  border: 1rpx solid #72a92c;
+  color: #72a92c;
+  border-radius: 5rpx;
+  padding: 6rpx 22rpx;
+  font-size: 13px;
+}

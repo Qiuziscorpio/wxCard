@@ -1,0 +1,23 @@
+
+<!--pages/map/map.wxml-->
+<view class="address-search">
+  <text class="iconfont icon-sousuo_sousuo" wx:if="{{isiconsousu}}"></text>
+  <input placeholder="搜索地点" class="search-input" placeholder-class="inputval" bindfocus="handlFocus" confirm-type="search" bindconfirm="getSearchData" bindinput="getInputVal" />
+</view>
+<map id="map" longitude="{{markers[0].longitude}}" latitude="{{markers[0].latitude}}" scale="18" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange"
+show-location style="width: 100%; height: 300px;"></map>
+<view class="address">
+  <view class="address-item" wx:key="{{itemName}}" wx:for="{{pois}}" wx:for-index="index" wx:for-item="itemName" bindtap="selectAddress" data-select="{{activeAddress}}">
+    <view class="address-itemcontent">
+      <view class="title">
+        {{itemName.title}}
+      </view>
+      <view class="subtitle">
+        {{itemName.address}}
+      </view>
+    </view>
+    <view class="address-itemlabel" wx:if="{{activeAddress}}" data-select="{{activeAddress}}">
+      <text class=" green  iconfont  icon-dagou"></text>
+    </view>
+  </view>
+</view>

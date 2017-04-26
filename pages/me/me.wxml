@@ -1,0 +1,70 @@
+
+<!--pages/me/me.wxml-->
+<view class=" bg-gray2" style="padding-top:20rpx;">
+  <view class="item-group" style="margin-top:0;">
+    <view class="item item-user">
+      <view class="sign">
+        <image src="{{userinfo.avatarUrl}}"></image>
+      </view>
+      <view class="message">
+        <view class="name">
+          {{userinfo.nickName}}
+        </view>
+        <view class="number">
+          <view class="phone"> {{loginsuccessdata.mobile}}
+            <text wx:if="{{loginsuccessdata.mobVerify}}" class="iconfont icon-shoujiyanzheng green"></text>
+            <text wx:else class="iconfont icon-shoujiyanzheng"></text>
+          </view>
+          <view>
+            <navigator url="../phoneverify/phoneverify" wx:if="{{loginsuccessdata.mobVerify}}" class="btn-verify">更换</navigator>
+            <navigator url="../phoneverify/phoneverify" class="btn-verify" wx:else>验证</navigator>
+          </view>
+        </view>
+
+        <!--<view class="number">
+          <view class="phone"> 未绑定
+            <text class="iconfont icon-shoujiyanzheng"></text>
+          </view>
+          <view class="btn-verify">
+            绑定
+          </view>
+        </view>-->
+      </view>
+    </view>
+  </view>
+  <view class="item-group">
+    <navigator class="item" url="../track/track">
+      <view>
+        <text class="iconfont icon-zuji"></text> 足迹
+      </view>
+    </navigator>
+    <navigator class="item" url="../visitor/visitor">
+      <view>
+        <text class="iconfont icon-fangkeyuyue"></text> 访客
+      </view>
+    </navigator>
+  </view>
+
+  <!--<view class="item-group">
+    <view class="item">
+      <text class="iconfont icon-sousuo"></text>搜索企业
+    </view>
+    <view class="item">
+      <text class="iconfont icon-card"></text>企业名片
+    </view>
+  </view>-->
+  <view class="item-group">
+    <navigator class="item" url="../setting/setting">
+      <view>
+        <text class="iconfont icon-shezhi"></text> 设置
+      </view>
+    </navigator>
+  </view>
+  <view class="item-group">
+    <navigator class="item" url="../about/about">
+      <view>
+        <text class="iconfont icon-guanyu"></text> 关于
+      </view>
+    </navigator>
+  </view>
+</view>

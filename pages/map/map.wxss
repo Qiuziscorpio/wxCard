@@ -1,0 +1,61 @@
+/* pages/map/map.wxss */
+
+.address {
+  padding: 0 23rpx;
+}
+
+.address .address-item {
+  border-bottom: 1rpx solid #e0e0e0;
+  padding: 23rpx 0;
+  font-size: 30rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.address .address-item .address-itemcontent.title {
+  font-size: 32rpx;
+  color: #121212;
+}
+
+.address .address-item .address-itemcontent .subtitle {
+  font-size: 25rpx;
+  color: #b4b4b4;
+  margin-top: 0;
+}
+
+.address-search {
+  padding: 16rpx;
+  background: #f0eff5;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-bottom: 1rpx solid #dbdadf;
+}
+
+.address-search .iconfont {
+  color: #909092;
+  position: absolute;
+  top:0;
+  padding-top: 22rpx;
+  font-size: 26rpx;
+  left:38%;
+  z-index: 99;
+}
+
+.address-search .search-input {
+  background: #fff;
+  border-radius: 5rpx;
+  font-size: 26rpx;
+  padding: 0 12rpx;
+  border: 1rpx solid #dbdadf;
+}
+
+.inputval {
+  text-align: center;
+  font-size: 26rpx;
+  color: #909092;
+}

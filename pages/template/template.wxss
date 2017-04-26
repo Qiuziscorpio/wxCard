@@ -1,0 +1,199 @@
+/* pages/template/template.wxss */
+@import "../../iconfont/iconfont.wxss";
+
+/*card 名片卡包*/
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 42rpx;
+  background: #fff;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 5rpx;
+  height: 400rpx;
+  margin-bottom: 24rpx;
+  position: relative;
+}
+
+.card-moren {
+  position: absolute;
+  right: 0;
+  top: -4rpx;
+}
+
+.card-moren .iconfont {
+  font-size: 60rpx;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-head .title .name {
+  font-size: 20px;
+  color: #212121;
+  display: block;
+}
+
+.card-head .title .label {
+  font-size: 14px;
+}
+
+.card-head .sign {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+}
+
+.card-head .sign image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+}
+
+.card-content {
+  font-size: 14px;
+}
+
+.card-content .name {
+  margin: 10rpx 0;
+}
+
+.card-content .phone {
+  color: #0ac7fd;
+}
+
+.card-attr {
+  background: #fff;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 5rpx;
+  margin-bottom: 24rpx;
+  font-size: 14px;
+}
+
+.card-attr .card-attritem {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+
+.card-attr .card-attritem .label {
+  color: #bdbdbd;
+}
+
+.card-attr .card-attritem:last-child {
+  border-bottom: 0;
+}
+
+.card-prompt {
+  text-align: center;
+  color: #bdbdbd;
+}
+
+.btn-group {
+  display: flex;
+}
+
+.btn-group .btn-groupitem {
+  flex: 1;
+  color: #757575;
+  background: #fff;
+  border: 1rpx solid #e0e0e0;
+}
+
+.btn-group .btn-groupitem::after {
+  border: 0;
+}
+
+.btn-group .btn-groupitem:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-group .btn-groupitem:last-child {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.cardB-item {
+  border-top: 1rpx solid #e0e0e0;
+  padding: 26rpx 30rpx;
+  background: #fff;
+  display: flex;
+  font-size: 13px;
+  color: #bdbdbd;
+  position: relative;
+}
+
+.cardB-item:last-child {
+  border-bottom: 1rpx solid #e0e0e0;
+}
+
+.cardB-item .cardB-mark {
+  flex: 0 0 96rpx;
+  margin-right: 23rpx;
+}
+
+.cardB-item .cardB-mark image {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 5rpx;
+  border: 1rpx solid #e0e0e0;
+  display: block;
+}
+
+.cardB-item .cardB-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.cardB-item .cardB-content .name {
+  font-size: 17px;
+  color: #212121;
+}
+
+.cardB-item .cardB-right {
+  display: flex;
+  align-items: center;
+}
+
+.cardB-item .cardB-right .iconfont {
+  font-size: 45rpx;
+}
+
+.cardB-item .cardB-right .btn {
+  background: #72a92c;
+  border: 1rpx solid #72a92c;
+  color: #fff;
+  border-radius: 5rpx;
+  font-size: 13px;
+  padding: 10rpx 20rpx;
+}
+
+.cardB-movebtn {
+  top: 0;
+  z-index: 9;
+  position: absolute;
+  right: 0;
+  color: #fff;
+  background: #72a92c;
+  height: 100%;
+  width: 135rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.made {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0);
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  height: 1000%;
+}

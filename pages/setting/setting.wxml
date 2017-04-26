@@ -1,0 +1,17 @@
+
+<!--pages/setting/setting.wxml-->
+<view>
+  <view class="item-group">
+    <view class="item">
+      <view class="classname">
+        自动交互名片
+      </view>
+      <view class="classname">
+        <switch bindchange="switch1Change" checked="{{ischecked}}"/>
+      </view>
+    </view>
+  </view>
+  <view class="main">
+    <text>扫描二维码同时交换己方名片</text>
+  </view>
+</view>

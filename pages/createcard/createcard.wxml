@@ -1,0 +1,90 @@
+
+<!--pages/createcard/createcard.wxml-->
+<view class="bg-gray2">
+  <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{ischinese}}">
+    <view class="card-form">
+      <view class="card-formitem">
+        <view class="card-user">
+          <view class="eng" catchtap="tabEng" wx:if="{{iseng}}">
+            <text class=" iconfont  icon-zhongyingwenqiehuan-xianshizhongyingwen"></text>
+          </view>
+          <view class="sign">
+            <image src="{{cardData.data.avatarUrl}}"></image>
+
+            <!--<image src="http://www.wzfzl.cn/uploads/allimg/170119/150202L32-5.jpg"></image>-->
+          </view>
+          <view class="message">
+            <view wx:if="{{cardData.data.mobile!=''}}">
+              <text class="btn-verify" catchtap="toVerifyCode" wx:if="{{cardData.data.mobileVerify}}">更改</text>
+              <text class="btn-verify" catchtap="toVerifyCode" wx:else>验证</text>
+            </view>
+            <input placeholder="姓名" class="card-input" placeholder-class="gray3" maxlength="18" name="name" value="{{cardData.data.name}}" bindinput="cardDataName" />
+            <input placeholder="联系方式" class="card-input" placeholder-class="gray3" maxlength="20" type="number" name="mobile" value="{{cardData.data.mobile}}" bindinput="cardDataMobile" disabled="{{!iseng}}" />
+          </view>
+        </view>
+      </view>
+      <view class="card-formitem">
+        <input placeholder="公司名称" class="card-input" placeholder-class="gray3" maxlength="20" name="companyName" value="{{cardData.data.companyName}}" bindinput="cardDataCompanyName" />
+        <input placeholder="职务名称" class="card-input" placeholder-class="gray3" maxlength="20" name="title" value="{{cardData.data.title}}" bindinput="cardDataTitle" />
+        <input placeholder="邮箱地址" class="card-input" placeholder-class="gray3" maxlength="20" name="email" value="{{cardData.data.email}}" bindinput="cardDataEmail" />
+      </view>
+      <view class="card-formitem">
+        <view class="card-inputlabel">
+          <input placeholder="让你好有更了解你" placeholder-class="gray3" maxlength="40" name="more" value="{{cardData.data.more}}" class="card-input" bindinput="cardDataMore" />
+        </view>
+      </view>
+      <view class="card-formitem">
+        <view class="card-inputlabel">
+          <text class="label green iconfont icon-location" bindtap="openAddress"></text>
+          <input value="{{cardData.data.address}}" placeholder="选入地址手动输入" placeholder-class="gray3" maxlength="40" name="address" class="card-input" bindinput="cardDataAddress" />
+        </view>
+      </view>
+      <view class="container">
+        <button formType="submit" class="btn-green">保存</button>
+      </view>
+    </view>
+  </form>
+  <form bindsubmit="enformSubmit" bindreset="enformReset" wx:if="{{isen}}">
+    <view class="card-form">
+      <view class="card-formitem">
+        <view class="card-user">
+          <view class="eng" catchtap="tabEng" wx:if="{{iseng}}">
+            <text class=" iconfont  icon-zhongyingwenqiehuan-xianshizhongyingwen"></text>
+          </view>
+          <view class="sign">
+            <image src="{{cardData.data.avatarUrl}}"></image>
+
+            <!--<image src="http://www.wzfzl.cn/uploads/allimg/170119/150202L32-5.jpg"></image>-->
+          </view>
+          <view class="message">
+            <view wx:if="{{cardData.data.mobile!=''}}">
+              <text class="btn-verify" catchtap="toVerifyCode" wx:if="{{cardData.data.mobileVerify}}">modify</text>
+              <text class="btn-verify" catchtap="toVerifyCode" wx:else>验证</text>
+            </view>
+            <input placeholder="Name" class="card-input" placeholder-class="gray3" maxlength="18" name="name" value="{{enCardData.data.name}}" bindinput="enCardDataName" />
+            <input placeholder="Phone Number" class="card-input" placeholder-class="gray3" maxlength="20" type="number" name="mobile" value="{{cardData.data.mobile}}" bindinput="enCardDataMobile" disabled="{{!iseng}}" />
+          </view>
+        </view>
+      </view>
+      <view class="card-formitem">
+        <input placeholder="Corporate" class="card-input" placeholder-class="gray3" maxlength="20" name="companyName" value="{{enCardData.data.companyName}}" bindinput="enCardDataCompanyName" />
+        <input placeholder="Post" class="card-input" placeholder-class="gray3" maxlength="20" name="title" value="{{enCardData.data.title}}" bindinput="enCardDataTitle" />
+        <input placeholder="E-mail" class="card-input" placeholder-class="gray3" maxlength="20" name="email" value="{{enCardData.data.email}}" bindinput="enCardDataEmail" />
+      </view>
+      <view class="card-formitem">
+        <view class="card-inputlabel">
+          <input placeholder="Let anyone know you better" placeholder-class="gray3" maxlength="40" name="more" value="{{enCardData.data.more}}" bindinput="enCardDataMore" class="card-input" />
+        </view>
+      </view>
+      <view class="card-formitem">
+        <view class="card-inputlabel">
+          <text class="label green iconfont icon-location" bindtap="openAddress"></text>
+          <input value="{{enCardData.data.address}}" placeholder="Select Address or Manual Input" placeholder-class="gray3" maxlength="40" name="address" bindinput="enCardDataAddress" class="card-input" />
+        </view>
+      </view>
+      <view class="container">
+        <button formType="submit" class="btn-green">Save</button>
+      </view>
+    </view>
+  </form>
+</view>

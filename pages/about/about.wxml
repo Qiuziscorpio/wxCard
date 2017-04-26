@@ -1,0 +1,12 @@
+
+<!--pages/about/about.wxml-->
+<view class="card-about">
+  <view class="head">
+    <image src="../../images/logo.jpg" class="logo"></image>
+    <view class="title">应用名称</view>
+    <view class="subtitle">V1.1.0</view>
+  </view>
+  <view class="content">
+    只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字只是一段文字
+  </view>
+</view>

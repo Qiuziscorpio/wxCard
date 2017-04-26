@@ -1,0 +1,9 @@
+
+<!--pages/mycard/mycard.wxml-->
+<import src="../template/template.wxml" />
+<view class="main bg-gray2">
+
+  <!--名片列表开始-->
+  <template is="card" data="{{cardData}}" />
+  <button class="btn-green" bindtap="openCreatecard">创建名片</button>
+</view>

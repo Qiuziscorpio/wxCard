@@ -1,0 +1,7 @@
+
+<!--pages/track/track.wxml-->
+<import src="../template/template.wxml" />
+<view class=" bg-gray2">
+  <!--足迹开始-->
+  <template is="cardB" data="{{customData}}" />
+</view>

@@ -1,0 +1,206 @@
+
+<!--pages/cardcase/cardcase.wxml-->
+<view class="made" wx:if="{{ismovebtn}}" bindtouchstart="hideMade">
+</view>
+<view class="swiper-tab">
+  <view class="swiper-tab-item  {{currenttab==0 ? 'active':''}}" data-current="0" bindtap="swiperTab">个人名片</view>
+  <view class="swiper-tab-item  {{currenttab==1 ? 'active':''}}" data-current="1" bindtap="swiperTab">企业名片</view>
+</view>
+<modal hidden="{{hidden}}" title="移动至" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" no-cancel="{{nocancel}}">
+  <view class="selectgroup">
+    <view class="selectgroup-item" wx:for="{{cardgroup.data}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName" bindtap="selectGroup" data-id="{{itemName.id}}">
+      <view class="selectgroup-content">
+        {{itemName.name}}
+        <text class="text-samll gray4" wx:if="{{itemName.name=='公司资源'}}">(无法移出，公司管理员可见)</text>
+        <text catchtap="deleteGroup" data-index="{{index}}" data-id="{{itemName.id}}" class="iconfont icon-arrows_circle_minus" wx:if="{{itemName.name!='公司资源'&&itemName.name!='未分组'}}"></text>
+      </view>
+      <view class="selectgroup-right" wx:if="{{itemName.select}}">
+        <text class="icon iconfont icon-dagou green"></text>
+      </view>
+    </view>
+    <view class="selectgroup-item" bindtap="addGroup" wx:if="{{isaddgroupinput}}">
+      <view class="selectgroup-content">
+        <text class="iconfont icon-arrows_circle_plus"></text>
+        添加组
+      </view>
+    </view>
+    <view class="selectgroup-item" wx:else>
+      <input placeholder="" maxlength="8" value="" bindconfirm="getDddGroupName" bindblur="getDddGroupName" focus="true" />
+    </view>
+  </view>
+</modal>
+
+<!--<swiper current="{{currenttab}}" class="swiper" bindchange="handleSwiperItem" circular="true">
+  <swiper-item>
+    <view class="cardcase">
+      <view class="searchgroup" wx:if="{{isSearch}}">
+        <view class="searchgroup-inputitem">
+          <text class="iconfont icon-sousuo_sousuo"></text>
+          <input bindinput="getSearchData" placeholder-class="gray3" placeholder="搜索" focus="true" />
+        </view>
+        <view class="searchgroup-right">
+          <text bindtap="showSearch" class="green">取消</text>
+        </view>
+      </view>
+      <view class="searchgroup" wx:else>
+        <view class="searchgroup-item" bindtap="selectSortType">
+          <view wx:if="{{userCardData.data.sortType===0}}">
+            <text class="iconfont icon-shijian"></text>按时间
+          </view>
+          <view wx:if="{{userCardData.data.sortType===1}}">
+            <text class="iconfont icon-letter-a-outline"></text>按字母
+          </view>
+          <view wx:if="{{userCardData.data.sortType===2}}">
+            <text class="iconfont icon-gongsi"></text>按公司
+          </view>
+          <view wx:if="{{userCardData.data.sortType===3}}">
+            <text class="iconfont icon-zu"></text>按分组
+          </view>
+        </view>
+        <view class="searchgroup-item" bindtap="showSearch">
+          <text class="iconfont icon-sousuo_sousuo"></text> 搜索
+        </view>
+      </view>
+      <view wx:if="{{userCardData.data.sortType===3}}">
+        <view class="searchgroup" wx:if="{{isselecgroup}}">
+          <view class="searchgroup-right" bindtap="showSelectGroup">
+            <text>选择</text>
+          </view>
+          <view class="searchgroup-inputitem">
+            <view class=" text-right">左侧滑动单项移动分组</view>
+          </view>
+        </view>
+        <view class="searchgroup" wx:else>
+          <view class="searchgroup-right" bindtap="showSelectGroup">
+            <text>取消</text>
+          </view>
+          <view class="searchgroup-inputitem" bindtap="showSelectGroupPop">
+            <view class="green text-right">移动</view>
+          </view>
+        </view>
+      </view>
+      <view class="cardcase-group" wx:for="{{cardcasedata}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName">
+        <view class="cardcase-groupid">
+          <checkbox-group class="checkboxgroup" bindchange="checkboxChange" wx:if="{{!isselecgroup&&userCardData.data.sortType===3}}" data-id="{{index}}">
+            <label class="checkboxgroup">
+              <checkbox value="{{item.name}}" checked="{{itemName.checked}}" />
+            </label>
+          </checkbox-group>
+          {{itemName.name}}
+        </view>
+        <view class="cardB-item" wx:for="{{itemName.items}}" wx:key="{{item}}" wx:for-index="itemsindex" wx:for-item="item">
+          <view class="searchgroup-left" wx:if="{{!isselecgroup&&userCardData.data.sortType===3}}">
+            <checkbox-group bindchange="checkboxChange2" wx:if="{{!isselecgroup&&userCardData.data.sortType===3}}" data-id="{{item.id}}">
+              <checkbox value="{{item.name}}" checked="{{item.checked}}" />
+            </checkbox-group>
+          </view>
+          <view class="cardB-mark" bindtap="handleSkip" data-id="{{item.id}}">
+            <image src="{{item.avatarUrl}}"></image>
+          </view>
+          <view class="cardB-content" bindtap="handleSkip" data-id="{{item.id}}">
+            <view class="name">{{item.name}}</view>
+            <view class="subtitle">{{item.companyName}}</view>
+          </view>
+          <view class="cardB-right">
+            <view>
+              <text bindtap="phoneCall" data-id="{{item.mobile}}" class="iconfont icon-dianhua green"></text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="hint" wx:if="{{cardcasedata.length=='0'}}">
+        没有更多了~
+      </view>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class="classname">
+    </view>
+  </swiper-item>
+</swiper>-->
+<view class="cardcase">
+  <view class="searchgroup" wx:if="{{isSearch}}">
+    <view class="searchgroup-inputitem">
+      <text class="iconfont icon-sousuo_sousuo"></text>
+      <input bindinput="getSearchData" placeholder-class="gray3" placeholder="搜索" focus="true" />
+    </view>
+    <view class="searchgroup-right">
+      <text bindtap="showSearch">取消</text>
+    </view>
+  </view>
+  <view class="searchgroup" wx:else>
+    <view class="searchgroup-item" bindtap="selectSortType">
+      <view wx:if="{{userCardData.data.sortType===0}}">
+        <text class="iconfont icon-shijian"></text>按时间
+      </view>
+      <view wx:if="{{userCardData.data.sortType===1}}">
+        <text class="iconfont icon-letter-a-outline"></text>按字母
+      </view>
+      <view wx:if="{{userCardData.data.sortType===2}}">
+        <text class="iconfont icon-gongsi"></text>按公司
+      </view>
+      <view wx:if="{{userCardData.data.sortType===3}}">
+        <text class="iconfont icon-zu"></text>按分组
+      </view>
+    </view>
+    <view class="searchgroup-item" bindtap="showSearch">
+      <text class="iconfont icon-sousuo_sousuo"></text> 搜索
+    </view>
+  </view>
+  <view wx:if="{{userCardData.data.sortType===3}}">
+    <view class="searchgroup" wx:if="{{isselecgroup}}">
+      <view class="searchgroup-right" bindtap="showSelectGroup">
+        <text class="gray">选择</text>
+      </view>
+      <view class="searchgroup-inputitem">
+        <view class=" text-right gray3">左侧滑动单项移动分组</view>
+      </view>
+    </view>
+    <view class="searchgroup" wx:else>
+      <view class="searchgroup-right" bindtap="showSelectGroup">
+        <text>取消</text>
+      </view>
+      <view class="searchgroup-inputitem" bindtap="showSelectGroupPop" wx:if="{{green}}">
+        <view class="green text-right">移动</view>
+      </view>
+      <view class="searchgroup-inputitem" wx:else>
+        <view class="gray3 text-right">移动</view>
+      </view>
+    </view>
+  </view>
+  <view class="cardcase-group" wx:for="{{cardcasedata}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName">
+    <view class="cardcase-groupid">
+      <checkbox-group class="checkboxgroup" bindchange="checkboxChange" wx:if="{{!isselecgroup&&userCardData.data.sortType===3&&itemName.name!='公司资源'&&itemName.items.length!=0}}" data-id="{{index}}">
+        <label class="checkboxgroup">
+          <checkbox value="{{item.name}}" checked="{{itemName.checked}}" />
+        </label>
+      </checkbox-group>
+      {{itemName.name}}
+    </view>
+    <view class="cardB-item" wx:for="{{itemName.items}}" wx:key="{{item}}" wx:for-index="itemsindex" wx:for-item="item" bindtouchmove="handleMove" bindtouchstart="handleStart" bindtouchend="handlechend" data-id="{{item.id}}" data-name="{{itemName.name}}">
+      <view class="searchgroup-left" wx:if="{{!isselecgroup&&userCardData.data.sortType===3}}">
+        <checkbox-group bindchange="checkboxChange2" wx:if="{{!isselecgroup&&userCardData.data.sortType===3&&itemName.name!='公司资源'}}" data-id="{{item.id}}" data-index="{{index}}">
+          <checkbox value="{{item.name}}" checked="{{item.checked}}" />
+        </checkbox-group>
+      </view>
+      <view class="cardB-mark" catchtap="handleSkip" data-id="{{item.id}}">
+        <image src="{{item.avatarUrl}}"></image>
+      </view>
+      <view class="cardB-content" catchtap="handleSkip" data-id="{{item.id}}">
+        <view class="name">{{item.name}}</view>
+        <view class="subtitle">{{item.companyName}}</view>
+      </view>
+      <view class="cardB-right">
+        <view>
+          <text bindtap="phoneCall" data-id="{{item.mobile}}" class="iconfont icon-dianhua green"></text>
+        </view>
+      </view>
+      <view wx:if="{{isselecgroup&&item.radio&&itemName.name!='公司资源'}}" class="cardB-movebtn" bindtap="showSelectGroupPop">
+        <text data-id="{{item.id}}"> 移动</text>
+      </view>
+    </view>
+  </view>
+  <view class="hint" wx:if="{{cardcasedata.length=='0'}}">
+    没有更多了~
+  </view>
+</view>

@@ -1,0 +1,82 @@
+
+<!--pages/carddetails/carddetails.wxml-->
+<view class="main bg-gray2">
+  <view class="bg-gray2">
+    <view class="classname">
+      <view class="card-item">
+        <view class="card-moren">
+          <text class="green iconfont icon-moren" wx:if="{{cardDetailsData.isDefault}}"></text>
+        </view>
+        <view class="card-head">
+          <view class="title">
+            <view class="name">{{cardDetailsData.name}}</view>
+            <view class="label">{{cardDetailsData.title}}</view>
+          </view>
+          <view class="sign">
+            <image src="{{cardDetailsData.avatarUrl}}" />
+          </view>
+        </view>
+        <view class="card-content">
+          <view class="phone" bindtap="phoneCall" data-id="{{cardDetailsData.mobile}}">
+            <text wx:if="{{cardDetailsData.mobileVerify}}" class="iconfont icon-shoujiyanzheng green"></text>
+            <text wx:else class=" gray iconfont icon-shoujiyanzheng"></text>
+            {{cardDetailsData.mobile}}
+          </view>
+          <view class="name">
+
+            <!--<text wx:if="{{cardDetailsData.companyVerify}}" class="green iconfont icon-yanzheng"></text>
+            <text wx:else class="iconfont icon-yanzheng"></text>-->
+            {{cardDetailsData.companyName}}
+          </view>
+          <view class="customcontent" wx:if="{{cardDetailsData.more!=''}}">
+            {{cardDetailsData.more}}
+          </view>
+          <view wx:else>
+            <text class="iconfont icon-location green"></text>
+            {{cardDetailsData.address}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="card-attr" wx:if="{{cardDetailsData.email!=''||cardDetailsData.more!=''}}">
+      <view class="card-attritem" wx:if="{{cardDetailsData.email!=''}}">
+        <text class="label">邮箱</text>
+        {{cardDetailsData.email}}
+      </view>
+      <view class="card-attritem" wx:if="{{cardDetailsData.more!=''}}">
+        <text class=" green iconfont icon-location"></text>
+        {{cardDetailsData.address}}
+      </view>
+    </view>
+    <view wx:if="{{cardDetailsData.mobile===mobile}}">
+      <view class="btn-group mb">
+        <button class="btn-groupitem" bindtap="removeCard" data-id="{{cardDetailsData.id}}">删除名片</button>
+        <button class="btn-groupitem" bindtap="setCardDefault" disabled="{{cardDetailsData.isDefault}}" data-id="{{cardDetailsData.id}}">设为默认</button>
+      </view>
+      <button class="btn-white mb" bindtap="editCard" data-id="{{cardDetailsData.id}}">编辑名片</button>
+    </view>
+    <view wx:else>
+      <button class="btn-white mb" wx:if="{{cardDetailsData.hasCollect}}" bindtap="undockCard" data-id="{{cardDetailsData.id}}">
+        <text>移除名片夹</text>
+      </button>
+      <button wx:else class="btn-white mb" bindtap="addCard" data-id="{{cardDetailsData.id}}">
+        <text>加入名片夹</text>
+      </button>
+      <button class="btn-white mb" bindtap="openMycard">
+        <navigator url="../mycard/mycard">
+          打开我的名片
+        </navigator>
+      </button>
+    </view>
+    <button class="btn-green mb" data-id="{{cardDetailsData.id}}" bindtap="openShare">
+      <text class="iconfont icon-icon1460188600932 f37"></text> 分享名片
+    </button>
+    <view class="card-prompt">
+      <text>
+        点击上面，生成图片分享到朋友圈
+      </text>
+      <text> 点击右上角，分享我的名片页面
+      </text>
+    </view>
+  </view>
+</view>

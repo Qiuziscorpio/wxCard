@@ -1,0 +1,4 @@
+/* pages/mycard/mycard.wxss */
+@import "../template/template.wxss";
+
+

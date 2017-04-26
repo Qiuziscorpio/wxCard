@@ -1,0 +1,9 @@
+
+<!--pages/visitor/visitor.wxml-->
+<import src="../template/template.wxml" />
+<view class=" bg-gray2">
+  <view wx:if="{{ishint}}">加载中....</view>
+
+  <!--访客开始-->
+  <template is="cardB" data="{{customData}}" />
+</view>

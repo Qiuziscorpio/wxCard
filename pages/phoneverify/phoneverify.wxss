@@ -1,0 +1,44 @@
+/* pages/phoneverify/phoneverify.wxss */
+@import "../createcard/createcard.wxss";
+
+
+.card-inputlabel{
+  display: flex;
+  align-items: center;
+}
+.card-inputlabel:last-child {
+  border-top: 1rpx solid #e0e0e0;
+}
+
+.card-inputlabel .card-input {
+  border: none;
+}
+
+.card-inputlabel .btn-verify {
+  position: absolute;
+  z-index: 99;
+  top: 23rpx;
+  right: 0;
+  background: #72a92c;
+  border: 1rpx solid #72a92c;
+  color: #fff;
+  border-radius: 5rpx;
+  padding: 6rpx 22rpx;
+  font-size: 13px;
+}
+
+.card-inputlabel .label {
+  display: block;
+  flex: 0 0 25%;
+  font-size: 14p;
+}
+
+.card-inputlabel .btn-verify.btn-disabled {
+  background: #bdbdbd;
+  border: 1rpx solid #bdbdbd;
+}
+
+button[disabled][type="default"], wx-button[disabled]:not([type]) {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(114, 169, 44, 0.5);
+}
