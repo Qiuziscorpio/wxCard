@@ -18,7 +18,7 @@ Page({
     //获取我的名片数据
     var that = this
     app.getData(that.data.cardDataUrl, function (res) {
-      if (res.data.length === 0) {
+      if (res.data.length == 0) {
         wx.showModal({
           title: '请创建名片',
           showCancel: false,
@@ -61,14 +61,46 @@ Page({
         }
       })
     }
-
   },
   radioChange: function (e) {
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var that = this
-    that.getCardData()
+    wx.login({
+      success: function (body) {
+        if (body.code) {
+
+          wx.request({
+            url: "https://api.91ygj.com/vCard/Card/jscode2session?code=" + body.code,
+            data: {
+            },
+            success: function (body) {
+              wx.getUserInfo({
+                success: function (res) {
+                  wx.setStorageSync('userInfo', res.userInfo)
+                  var data = {
+                    'iv': res.iv,//wx.getUserInfo接口返回那里的iv
+                    'rawData': res.rawData, //wx.getUserInfo接口返回那里的iv
+                    'signature': res.signature,// wx.getUserInfo接口返回那里的signature
+                    'encryptedData': res.encryptedData,  //wx.getUserInfo接口返回那里的encryptedData
+                    'session_key': body.data.session_key //wx.login接口下面 “code 换取 session_key” 获得
+                  }
+
+                  app.getLoginData(data, function (res2) {
+                    wx.setStorageSync('token', res2.data.token)
+                    wx.setStorageSync('loginSuccessData', res2.data)
+                    that.getCardData();
+                  })
+                }
+              })
+            }
+          })
+        } else {
+          console.log('登录失败')
+        }
+      }
+    })
   },
   onReady: function () {
     // 页面渲染完成
@@ -76,7 +108,9 @@ Page({
   onShow: function () {
     // 页面显示
     var that = this
-    that.getCardData()
+    if (wx.getStorageSync('token')) {
+      that.getCardData()
+    }
   },
   onHide: function () {
     // 页面隐藏

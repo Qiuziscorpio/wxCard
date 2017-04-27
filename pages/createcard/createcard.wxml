@@ -19,7 +19,7 @@
               <text class="btn-verify" catchtap="toVerifyCode" wx:else>验证</text>
             </view>
             <input placeholder="姓名" class="card-input" placeholder-class="gray3" maxlength="18" name="name" value="{{cardData.data.name}}" bindinput="cardDataName" />
-            <input placeholder="联系方式" class="card-input" placeholder-class="gray3" maxlength="20" type="number" name="mobile" value="{{cardData.data.mobile}}" bindinput="cardDataMobile" disabled="{{!iseng}}" />
+            <input placeholder="联系方式" class="card-input" placeholder-class="gray3" maxlength="20" type="number" name="mobile" value="{{cardData.data.mobile}}" bindinput="cardDataMobile" disabled="{{cardData.data.mobileVerify}}" />
           </view>
         </view>
       </view>
@@ -62,7 +62,7 @@
               <text class="btn-verify" catchtap="toVerifyCode" wx:else>验证</text>
             </view>
             <input placeholder="Name" class="card-input" placeholder-class="gray3" maxlength="18" name="name" value="{{enCardData.data.name}}" bindinput="enCardDataName" />
-            <input placeholder="Phone Number" class="card-input" placeholder-class="gray3" maxlength="20" type="number" name="mobile" value="{{cardData.data.mobile}}" bindinput="enCardDataMobile" disabled="{{!iseng}}" />
+            <input placeholder="Phone Number" class="card-input" placeholder-class="gray3" maxlength="20" type="number" name="mobile" value="{{cardData.data.mobile}}" bindinput="enCardDataMobile" disabled="{{cardData.data.mobileVerify}}" />
           </view>
         </view>
       </view>

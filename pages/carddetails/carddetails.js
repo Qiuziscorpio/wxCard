@@ -6,7 +6,20 @@ Page({
   data: {
     mobile: '',
     getData: {},
+    isshare: false,
     cardDetailsData: {},
+    removeCollCard: {
+      'url': 'Card/removeCollCard',
+      'data': {
+        'id': ''
+      }
+    },
+    GetOthersCard2: {
+      'url': 'https://api.91ygj.com/vCard/Card/GetOthersCard2',
+      'data': {
+        'id': ''
+      }
+    },
     CardShareData: {
       'url': 'Card/GetCardShared',
       'data': {
@@ -32,7 +45,20 @@ Page({
       }
     }
   },
-    //拨打电话
+  onShareAppMessage: function () {
+    var that = this
+    return {
+      title: that.data.cardDetailsData.name,
+      path: 'pages/carddetails/carddetails?id=' + that.data.cardDetails.data.id + '&share=1',
+      success: function (res) {
+        // 分享成功
+      },
+      fail: function (res) {
+        // 分享失败
+      }
+    }
+  },
+  //拨打电话
   phoneCall: function (e) {
     wx.makePhoneCall({
       phoneNumber: e.target.dataset.id //仅为示例，并非真实的电话号码
@@ -96,13 +122,12 @@ Page({
     })
   },
   //移除收藏的名片
-  undockCard: function () {
+  undockCard: function (e) {
     var that = this
     that.setData({
-      'collCardData.data.id': e.target.dataset.id
+      'removeCollCard.data.id': e.target.dataset.id
     })
-
-    app.postData(that.data.collCardData, function (res) {
+    app.postData(that.data.removeCollCard, function (res) {
       wx.showToast({
         title: res.msg,
         icon: 'success',
@@ -123,7 +148,6 @@ Page({
     that.setData({
       'collCardData.data.id': e.target.dataset.id
     })
-
     app.postData(that.data.collCardData, function (res) {
       wx.showToast({
         title: res.msg,
@@ -156,23 +180,46 @@ Page({
     var that = this
     that.setData({
       'cardDetails.data.id': options.id,
-      'othersCardDetails.data.id': options.id
+      'othersCardDetails.data.id': options.id,
+      'GetOthersCard2.data.id': options.id
     })
-    if (options.type) {
-      that.setData({
-        getData: that.data.othersCardDetails,
+    if (options.share) {
+      wx.request({
+        url: that.data.GetOthersCard2.url,
+        method: 'POST',
+        data: that.data.GetOthersCard2.data,
+        header: {
+          'token': wx.getStorageSync('loginSuccessData').token,
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          that.setData({
+            isshare: true,
+            cardDetailsData: res.data.data,
+            mobile: wx.getStorageSync('loginSuccessData').mobile
+          })
+        },
+        fail: function (res) {
+          console.log('请求出错')
+        }
       })
     } else {
-      that.setData({
-        getData: that.data.cardDetails,
+      if (options.type) {
+        that.setData({
+          getData: that.data.othersCardDetails,
+        })
+      } else {
+        that.setData({
+          getData: that.data.cardDetails,
+        })
+      }
+      app.postData(that.data.getData, function (res) {
+        that.setData({
+          cardDetailsData: res.data,
+          mobile: wx.getStorageSync('loginSuccessData').mobile
+        })
       })
     }
-    app.postData(that.data.getData, function (res) {
-      that.setData({
-        cardDetailsData: res.data,
-        mobile: wx.getStorageSync('loginSuccessData').mobile
-      })
-    })
   },
   onReady: function () {
     // 页面渲染完成

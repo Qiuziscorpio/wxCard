@@ -38,17 +38,18 @@
         </view>
       </view>
     </view>
-    <view class="card-attr" wx:if="{{cardDetailsData.email!=''||cardDetailsData.more!=''}}">
-      <view class="card-attritem" wx:if="{{cardDetailsData.email!=''}}">
+    <view class="card-attr">
+      <view class="card-attritem">
         <text class="label">邮箱</text>
-        {{cardDetailsData.email}}
+        <text wx:if="{{cardDetailsData.email==''}}" class="gray4"> 暂时没有邮箱</text>
+        <text wx:else> {{cardDetailsData.email}}</text>
       </view>
       <view class="card-attritem" wx:if="{{cardDetailsData.more!=''}}">
         <text class=" green iconfont icon-location"></text>
         {{cardDetailsData.address}}
       </view>
     </view>
-    <view wx:if="{{cardDetailsData.mobile===mobile}}">
+    <view wx:if="{{cardDetailsData.mobile===mobile&&!isshare}}">
       <view class="btn-group mb">
         <button class="btn-groupitem" bindtap="removeCard" data-id="{{cardDetailsData.id}}">删除名片</button>
         <button class="btn-groupitem" bindtap="setCardDefault" disabled="{{cardDetailsData.isDefault}}" data-id="{{cardDetailsData.id}}">设为默认</button>

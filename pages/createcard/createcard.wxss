@@ -4,7 +4,7 @@
 .card-input {
   border-bottom: 1rpx solid #e0e0e0;
   padding: 23rpx 0;
-  font-size:14px;
+  font-size: 14px;
   width: 100%;
 }
 
@@ -18,8 +18,12 @@
 
 .card-inputlabel .label {
   margin-right: 5rpx;
-  padding: 20rpx 0;
+  padding: 23rpx 0;
   font-size: 14px;
+}
+
+.card-inputlabel .label.icon-location {
+  font-size: 20px;
 }
 
 .card-formitem {
@@ -77,5 +81,5 @@
   color: #72a92c;
   border-radius: 5rpx;
   padding: 6rpx 22rpx;
-  font-size:13px;
+  font-size: 13px;
 }

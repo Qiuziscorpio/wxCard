@@ -5,5 +5,5 @@
 
   <!--名片列表开始-->
   <template is="card" data="{{cardData}}" />
-  <button class="btn-green" bindtap="openCreatecard">创建名片</button>
+  <button class="btn-green" bindtap="openCreatecard" wx:if="{{cardData.length<5}}">创建名片</button>
 </view>

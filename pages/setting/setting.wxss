@@ -1,2 +1,7 @@
 /* pages/setting/setting.wxss */
 @import "../me/me.wxss";
+
+.item {
+  display: flex;
+  justify-content: space-between;
+}
