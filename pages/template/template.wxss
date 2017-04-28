@@ -19,7 +19,7 @@
 .card-moren {
   position: absolute;
   right: 0;
-  top: -4rpx;
+  top: -4px;
 }
 
 .card-moren .iconfont {

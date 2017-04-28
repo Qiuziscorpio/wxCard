@@ -184,24 +184,26 @@ Page({
       'GetOthersCard2.data.id': options.id
     })
     if (options.share) {
-      wx.request({
-        url: that.data.GetOthersCard2.url,
-        method: 'POST',
-        data: that.data.GetOthersCard2.data,
-        header: {
-          'token': wx.getStorageSync('loginSuccessData').token,
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          that.setData({
-            isshare: true,
-            cardDetailsData: res.data.data,
-            mobile: wx.getStorageSync('loginSuccessData').mobile
-          })
-        },
-        fail: function (res) {
-          console.log('请求出错')
-        }
+      app.getLogiCallback('', function () {
+        wx.request({
+          url: that.data.GetOthersCard2.url,
+          method: 'POST',
+          data: that.data.GetOthersCard2.data,
+          header: {
+            'token': wx.getStorageSync('loginSuccessData').token,
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            that.setData({
+              isshare: true,
+              cardDetailsData: res.data.data,
+              mobile: wx.getStorageSync('loginSuccessData').mobile
+            })
+          },
+          fail: function (res) {
+            console.log('请求出错')
+          }
+        })
       })
     } else {
       if (options.type) {
@@ -226,13 +228,16 @@ Page({
   },
   onShow: function () {
     // 页面显示
-    var that = this
-    app.postData(that.data.getData, function (res) {
-      that.setData({
-        cardDetailsData: res.data,
-        mobile: wx.getStorageSync('loginSuccessData').mobile
+    if (wx.getStorageSync('token')) {
+      var that = this
+      app.postData(that.data.getData, function (res) {
+        that.setData({
+          cardDetailsData: res.data,
+          mobile: wx.getStorageSync('loginSuccessData').mobile
+        })
       })
-    })
+    }
+
   },
   onHide: function () {
     // 页面隐藏

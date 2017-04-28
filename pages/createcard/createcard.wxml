@@ -30,7 +30,7 @@
       </view>
       <view class="card-formitem">
         <view class="card-inputlabel">
-          <input placeholder="让你好有更了解你" placeholder-class="gray3" maxlength="40" name="more" value="{{cardData.data.more}}" class="card-input" bindinput="cardDataMore" />
+          <input placeholder="让你好友更了解你" placeholder-class="gray3" maxlength="40" name="more" value="{{cardData.data.more}}" class="card-input" bindinput="cardDataMore" />
         </view>
       </view>
       <view class="card-formitem">
