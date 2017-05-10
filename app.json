@@ -10,8 +10,7 @@
     "pages/about/about",
     "pages/setting/setting",
     "pages/visitor/visitor",
-    "pages/track/track",
-    "pages/logs/logs"
+    "pages/track/track"
   ],
   "window": {
     "backgroundTextStyle": "dark",

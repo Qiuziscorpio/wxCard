@@ -8,16 +8,28 @@
 </view>
 <modal hidden="{{hidden}}" title="移动至" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" no-cancel="{{nocancel}}">
   <view class="selectgroup">
-    <view class="selectgroup-item" wx:for="{{cardgroup.data}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName" bindtap="selectGroup" data-id="{{itemName.id}}">
+
+    <view class="selectgroup-item" wx:for="{{cardgroup.data}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName" bindtap="selectGroup" data-id="{{itemName.id}}" wx:if="{{itemName.name=='公司资源 &&isbindCompanyId'}}">
       <view class="selectgroup-content">
         {{itemName.name}}
-        <text class="text-samll gray4" wx:if="{{itemName.name=='公司资源'}}">(无法移出，公司管理员可见)</text>
-        <text catchtap="deleteGroup" data-index="{{index}}" data-id="{{itemName.id}}" class="iconfont icon-arrows_circle_minus" wx:if="{{itemName.name!='公司资源'&&itemName.name!='未分组'}}"></text>
+        <text class="text-samll gray4">(无法移出，公司管理员可见)</text>
       </view>
       <view class="selectgroup-right" wx:if="{{itemName.select}}">
         <text class="icon iconfont icon-dagou green"></text>
       </view>
     </view>
+
+
+    <view class="selectgroup-item" wx:for="{{cardgroup.data}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName" bindtap="selectGroup" data-id="{{itemName.id}}" wx:if="{{itemName.name!='公司资源'}}" >
+      <view class="selectgroup-content">
+        {{itemName.name}}
+        <text catchtap="deleteGroup" data-name="{{itemName.name}}" data-index="{{index}}" data-id="{{itemName.id}}" class="iconfont icon-arrows_circle_minus" wx:if="{{itemName.name!='未分组'}}"></text>
+      </view>
+      <view class="selectgroup-right" wx:if="{{itemName.select}}">
+        <text class="icon iconfont icon-dagou green"></text>
+      </view>
+    </view>
+
     <view class="selectgroup-item" bindtap="addGroup" wx:if="{{isaddgroupinput}}">
       <view class="selectgroup-content">
         <text class="iconfont icon-arrows_circle_plus"></text>
@@ -25,7 +37,7 @@
       </view>
     </view>
     <view class="selectgroup-item" wx:else>
-      <input placeholder="" maxlength="8" value="" bindconfirm="getDddGroupName" bindblur="getDddGroupName" focus="true" />
+      <input placeholder="" maxlength="8" value="" bindconfirm="getDddGroupName" bindblur="setDddGroupName" focus="true" />
     </view>
   </view>
 </modal>
@@ -169,15 +181,18 @@
     </view>
   </view>
   <view class="cardcase-group" wx:for="{{cardcasedata}}" wx:key="{{itemName}}" wx:for-index="index" wx:for-item="itemName">
-    <view class="cardcase-groupid">
-      <checkbox-group class="checkboxgroup" bindchange="checkboxChange" wx:if="{{!isselecgroup&&userCardData.data.sortType===3&&itemName.name!='公司资源'&&itemName.items.length!=0}}" data-id="{{index}}">
+    <view class="cardcase-groupid" wx:if="{{userCardData.data.sortType===3}}">
+      <checkbox-group class="checkboxgroup" bindchange="checkboxChange" wx:if="{{itemName.name!='公司资源'&&itemName.items.length!=0&&!isselecgroup}}" data-id="{{index}}">
         <label class="checkboxgroup">
           <checkbox value="{{item.name}}" checked="{{itemName.checked}}" />
         </label>
       </checkbox-group>
+    <text wx:if="{{itemName.name=='公司资源'}}"><text wx:if="{{isbindCompanyId}}">公司资源 </text></text><text wx:else>{{itemName.name}}</text>
+    </view>
+    <view class="cardcase-groupid" wx:else>
       {{itemName.name}}
     </view>
-    <view class="cardB-item" wx:for="{{itemName.items}}" wx:key="{{item}}" wx:for-index="itemsindex" wx:for-item="item" bindtouchmove="handleMove" bindtouchstart="handleStart" bindtouchend="handlechend" data-id="{{item.id}}" data-name="{{itemName.name}}">
+    <view class="cardB-item" wx:for="{{itemName.items}}" wx:key="{{item}}" wx:for-index="itemsindex" wx:for-item="item" bindtouchmove="handleMove" bindtouchstart="handleStart" data-id="{{item.id}}" data-name="{{itemName.name}}">
       <view class="searchgroup-left" wx:if="{{!isselecgroup&&userCardData.data.sortType===3}}">
         <checkbox-group bindchange="checkboxChange2" wx:if="{{!isselecgroup&&userCardData.data.sortType===3&&itemName.name!='公司资源'}}" data-id="{{item.id}}" data-index="{{index}}">
           <checkbox value="{{item.name}}" checked="{{item.checked}}" />

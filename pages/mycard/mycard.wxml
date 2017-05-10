@@ -1,9 +1,33 @@
 
 <!--pages/mycard/mycard.wxml-->
 <import src="../template/template.wxml" />
-<view class="main bg-gray2">
+<!--广告引导图-->
+<swiper class="slide" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" indicator-active-color="#fff" wx:if="{{cardData==''}}">
+  <swiper-item>
+    <view class="slide-item a">
+      <navigator url="../createcard/createcard?id=0">
+        <span class="slide-btn ">马上创建名片</span> 
+      </navigator>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class="slide-item b">
+      <navigator url="../createcard/createcard?id=0">
+        <span class="slide-btn ">马上创建名片</span> 
+      </navigator>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class="slide-item c">
+      <navigator url="../createcard/createcard?id=0">
+        <span class="slide-btn ">马上创建名片</span> 
+      </navigator>
+    </view>
+  </swiper-item>
+</swiper>
 
-  <!--名片列表开始-->
+<!--名片列表开始-->
+<view class="main bg-gray2" wx:else>
   <template is="card" data="{{cardData}}" />
   <button class="btn-green" bindtap="openCreatecard" wx:if="{{cardData.length<5}}">创建名片</button>
 </view>

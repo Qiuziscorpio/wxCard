@@ -26,17 +26,17 @@
       <view class="card-formitem">
         <input placeholder="公司名称" class="card-input" placeholder-class="gray3" maxlength="20" name="companyName" value="{{cardData.data.companyName}}" bindinput="cardDataCompanyName" />
         <input placeholder="职务名称" class="card-input" placeholder-class="gray3" maxlength="20" name="title" value="{{cardData.data.title}}" bindinput="cardDataTitle" />
-        <input placeholder="邮箱地址" class="card-input" placeholder-class="gray3" maxlength="20" name="email" value="{{cardData.data.email}}" bindinput="cardDataEmail" />
+        <input placeholder="邮箱地址" class="card-input" placeholder-class="gray3" maxlength="20" name="email" value="{{cardData.data.email}}" bindinput="cardDataEmail"/>
       </view>
       <view class="card-formitem">
         <view class="card-inputlabel">
-          <input placeholder="让你好友更了解你" placeholder-class="gray3" maxlength="40" name="more" value="{{cardData.data.more}}" class="card-input" bindinput="cardDataMore" />
+          <input placeholder="自我介绍" placeholder-class="gray3" maxlength="40" name="more" value="{{cardData.data.more}}" class="card-input" bindinput="cardDataMore" />
         </view>
       </view>
       <view class="card-formitem">
         <view class="card-inputlabel">
           <text class="label green iconfont icon-location" bindtap="openAddress"></text>
-          <input value="{{cardData.data.address}}" placeholder="选入地址手动输入" placeholder-class="gray3" maxlength="40" name="address" class="card-input" bindinput="cardDataAddress" />
+          <input value="{{cardData.data.address}}" placeholder="选入地址手动输入" placeholder-class="gray3" maxlength="40" name="address" class="card-input" />
         </view>
       </view>
       <view class="container">
@@ -58,10 +58,10 @@
           </view>
           <view class="message">
             <view wx:if="{{cardData.data.mobile!=''}}">
-              <text class="btn-verify" catchtap="toVerifyCode" wx:if="{{cardData.data.mobileVerify}}">modify</text>
-              <text class="btn-verify" catchtap="toVerifyCode" wx:else>验证</text>
+              <text class="btn-verify" catchtap="toVerifyCode" wx:if="{{cardData.data.mobileVerify}}">change</text>
+              <text class="btn-verify" catchtap="toVerifyCode" wx:else>verify</text>
             </view>
-            <input placeholder="Name" class="card-input" placeholder-class="gray3" maxlength="18" name="name" value="{{enCardData.data.name}}" bindinput="enCardDataName" />
+            <input placeholder="Name" class="card-input" placeholder-class="gray3" maxlength="18" name="name" value="{{cardData.data.name}}" bindinput="enCardDataName" />
             <input placeholder="Phone Number" class="card-input" placeholder-class="gray3" maxlength="20" type="number" name="mobile" value="{{cardData.data.mobile}}" bindinput="enCardDataMobile" disabled="{{cardData.data.mobileVerify}}" />
           </view>
         </view>
@@ -73,13 +73,13 @@
       </view>
       <view class="card-formitem">
         <view class="card-inputlabel">
-          <input placeholder="Let anyone know you better" placeholder-class="gray3" maxlength="40" name="more" value="{{enCardData.data.more}}" bindinput="enCardDataMore" class="card-input" />
+          <input placeholder="Introduce Yourself" placeholder-class="gray3" maxlength="40" name="more" value="{{enCardData.data.more}}" bindinput="enCardDataMore" class="card-input" />
         </view>
       </view>
       <view class="card-formitem">
         <view class="card-inputlabel">
           <text class="label green iconfont icon-location" bindtap="openAddress"></text>
-          <input value="{{enCardData.data.address}}" placeholder="Select Address or Manual Input" placeholder-class="gray3" maxlength="40" name="address" bindinput="enCardDataAddress" class="card-input" />
+          <input value="{{enCardData.data.address}}" placeholder="Select Address or Manual Input" placeholder-class="gray3" maxlength="80" name="address" class="card-input" />
         </view>
       </view>
       <view class="container">

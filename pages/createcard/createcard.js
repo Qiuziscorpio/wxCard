@@ -113,7 +113,9 @@ Page({
         'cardData.data.id': '',
         'cardData.data.mobile': wx.getStorageSync('loginSuccessData').mobile,
         'cardData.data.mobileVerify': wx.getStorageSync('loginSuccessData').mobVerify,
-        'cardData.data.avatarUrl': wx.getStorageSync('userInfo').avatarUrl
+        'cardData.data.avatarUrl': wx.getStorageSync('userInfo').avatarUrl,
+        'cardData.data.name': wx.getStorageSync('userInfo').nickName,
+
       })
       wx.setNavigationBarTitle({
         title: '创建名片'
@@ -124,7 +126,9 @@ Page({
         'cardData.data.id': options.id,
         'cardData.data.mobile': wx.getStorageSync('loginSuccessData').mobile,
         'cardData.data.mobileVerify': wx.getStorageSync('loginSuccessData').mobVerify,
-        'cardData.data.avatarUrl': wx.getStorageSync('userInfo').avatarUrl
+        'cardData.data.avatarUrl': wx.getStorageSync('userInfo').avatarUrl,
+        'cardData.data.name': wx.getStorageSync('userInfo').nickName,
+
       })
       wx.setNavigationBarTitle({
         title: '编辑名片'
@@ -172,21 +176,39 @@ Page({
   },
   tabEng: function () {
     var that = this
-    if (that.data.ischinese) {
-      wx.setStorageSync('cardData', that.data.cardData)
-      return that.setData({
-        ischinese: false,
-        isen: true,
-        enCardData: wx.getStorageSync('enCardData')
-      })
-    }
+
     if (that.data.isen) {
       wx.setStorageSync('enCardData', that.data.enCardData)
-      return that.setData({
-        ischinese: true,
-        isen: false,
-        cardData: wx.getStorageSync('cardData')
-      })
+      if (wx.getStorageSync('cardData')) {
+        return that.setData({
+          ischinese: true,
+          isen: false,
+          cardData: wx.getStorageSync('cardData')
+        })
+      } else {
+        return that.setData({
+          ischinese: true,
+          isen: false,
+          cardData: that.data.cardData
+        })
+      }
+    }
+    if (that.data.ischinese) {
+      wx.setStorageSync('cardData', that.data.cardData)
+
+      if (wx.getStorageSync('enCardData')) {
+        return that.setData({
+          ischinese: false,
+          isen: true,
+          enCardData: wx.getStorageSync('enCardData')
+        })
+      } else {
+        return that.setData({
+          ischinese: false,
+          isen: true,
+          enCardData: that.data.enCardData
+        })
+      }
     }
   },
   openAddress: function () {
@@ -212,7 +234,7 @@ Page({
   },
   formSubmit: function (e) {
     var that = this
-    if (e.detail.value.name === '' || e.detail.value.mobile === '' || e.detail.value.address === '') {
+    if (e.detail.value.name === '' || e.detail.value.mobile === '') {
       if (e.detail.value.name === '') {
         wx.showToast({
           title: '姓名必填',
@@ -227,14 +249,8 @@ Page({
           duration: 2000
         })
       }
-      if (e.detail.value.address === '') {
-        wx.showToast({
-          title: '地址必填',
-          image: '../../images/error.png',
-          duration: 2000
-        })
-      }
     } else {
+
       var data = {
         'url': 'Card/SaveCard',
         'data': {
@@ -252,24 +268,51 @@ Page({
           'language': 0
         }
       }
-      app.postData(data, function (res) {
-        if (res.code === 200) {
-          var loginSuccessData = {
-            'token': wx.getStorageSync('loginSuccessData').token,
-            'mobile': e.detail.value.mobile,
-            'mobVerify': wx.getStorageSync('loginSuccessData').mobVerify
-          }
-          wx.setStorageSync('loginSuccessData', loginSuccessData)
-          wx.navigateBack({
-            delta: 1
+      if (e.detail.value.email != '') {
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!filter.test(e.detail.value.email)) {
+          wx.showToast({
+            title: '邮箱错误',
+            image: '../../images/error.png',
+            duration: 2000
+          })
+        } else {
+
+          app.postData(data, function (res) {
+            if (res.code === 200) {
+              var loginSuccessData = {
+                'token': wx.getStorageSync('loginSuccessData').token,
+                'mobile': e.detail.value.mobile,
+                'mobVerify': wx.getStorageSync('loginSuccessData').mobVerify
+              }
+              wx.setStorageSync('loginSuccessData', loginSuccessData)
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           })
         }
-      })
+
+      } else {
+        app.postData(data, function (res) {
+          if (res.code === 200) {
+            var loginSuccessData = {
+              'token': wx.getStorageSync('loginSuccessData').token,
+              'mobile': e.detail.value.mobile,
+              'mobVerify': wx.getStorageSync('loginSuccessData').mobVerify
+            }
+            wx.setStorageSync('loginSuccessData', loginSuccessData)
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
     }
   },
   enformSubmit: function (e) {
     var that = this
-    if (e.detail.value.name === '' || e.detail.value.mobile === '' || e.detail.value.address === '') {
+    if (e.detail.value.name === '' || e.detail.value.mobile === '') {
       if (e.detail.value.name === '') {
         wx.showToast({
           title: 'name required',
@@ -280,13 +323,6 @@ Page({
       if (e.detail.value.mobile === '') {
         wx.showToast({
           title: 'mobile required',
-          image: '../../images/error.png',
-          duration: 2000
-        })
-      }
-      if (e.detail.value.address === '') {
-        wx.showToast({
-          title: 'address required',
           image: '../../images/error.png',
           duration: 2000
         })
@@ -309,19 +345,60 @@ Page({
           'language': 1
         }
       }
-      app.postData(data, function (res) {
-        if (res.code === 200) {
-          var loginSuccessData = {
-            'token': wx.getStorageSync('loginSuccessData').token,
-            'mobile': e.detail.value.mobile,
-            'mobVerify': wx.getStorageSync('loginSuccessData').mobVerify
-          }
-          wx.setStorageSync('loginSuccessData', loginSuccessData)
-          wx.navigateBack({
-            delta: 1
+      if (e.detail.value.email != '') {
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!filter.test(e.detail.value.email)) {
+          wx.showToast({
+            title: 'Email Error',
+            image: '../../images/error.png',
+            duration: 2000
+          })
+        } else {
+          app.postData(data, function (res) {
+            if (res.code === 200) {
+              var loginSuccessData = {
+                'token': wx.getStorageSync('loginSuccessData').token,
+                'mobile': e.detail.value.mobile,
+                'mobVerify': wx.getStorageSync('loginSuccessData').mobVerify
+              }
+              wx.setStorageSync('loginSuccessData', loginSuccessData)
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           })
         }
-      })
+      } else {
+        app.postData(data, function (res) {
+          if (res.code === 200) {
+            var loginSuccessData = {
+              'token': wx.getStorageSync('loginSuccessData').token,
+              'mobile': e.detail.value.mobile,
+              'mobVerify': wx.getStorageSync('loginSuccessData').mobVerify
+            }
+            wx.setStorageSync('loginSuccessData', loginSuccessData)
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
   },
   formReset: function () {

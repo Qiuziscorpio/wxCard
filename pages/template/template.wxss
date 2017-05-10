@@ -5,13 +5,13 @@
 
 .card-item {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: space-between;
   padding: 42rpx;
   background: #fff;
   border: 1rpx solid #e0e0e0;
   border-radius: 5rpx;
-  height: 400rpx;
+  height: 290rpx;
   margin-bottom: 24rpx;
   position: relative;
 }
@@ -19,7 +19,7 @@
 .card-moren {
   position: absolute;
   right: 0;
-  top: -4px;
+  top: -2px;
 }
 
 .card-moren .iconfont {
@@ -27,6 +27,7 @@
 }
 
 .card-head {
+  flex-basis: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -54,6 +55,9 @@
 }
 
 .card-content {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
   font-size: 14px;
 }
 
@@ -63,6 +67,16 @@
 
 .card-content .phone {
   color: #0ac7fd;
+  font-size: 17px;
+}
+
+.card-content .icon-code {
+  align-self: flex-end;
+}
+
+.card-content .icon-code .iconfont {
+  font-size: 25px;
+  color: #757575;
 }
 
 .card-attr {
@@ -195,5 +209,13 @@
   left: 0;
   width: 100%;
   z-index: 1;
-  height: 1000%;
+  height: 100%;
+}
+
+.mainpop {
+  position: absolute;
+  background: rgba(0, 0, 0, 0);
+  z-index: 999;
+  width: 100%;
+  height: 100%;
 }

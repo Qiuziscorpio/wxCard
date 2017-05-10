@@ -6,7 +6,8 @@ Page({
     lastX: 0,
     lastY: 0,
     text: "没有滑动",
-    touchDot: 0,
+    touchDotX: 0,
+    touchDotY: 0,
     istouch: true,
     green: false,
     slideselecgroup: false,
@@ -25,6 +26,7 @@ Page({
     isSearch: false,
     cardcasedata: {},
     currenttab: 0,
+    isbindCompanyId: false,
     userCardData: {
       'url': 'Card/GetCollectCard',
       'data': {
@@ -75,12 +77,16 @@ Page({
       'userCardData.data.sortType': sortType,
       'userCardData.data.key': key
     })
-
     app.postData(that.data.userCardData, function (res) {
       that.setData({
         cardcasedata: res.data
       })
       if (sortType == 3) {
+        if (wx.getStorageSync('loginSuccessData').bindCompanyId != '') {
+          that.setData({
+            isbindCompanyId: true
+          })
+        }
         that.data.cardcasedata.map(function (v, i) {
           v.checked = false
           v.items.map(function (v2, i2) {
@@ -101,7 +107,6 @@ Page({
     that.setData({
       isSearch: !that.data.isSearch
     })
-
   },
   //获取搜索数据
   getSearchData: function (e) {
@@ -173,7 +178,6 @@ Page({
   //分组弹框 确定按钮
   confirm: function (e) {
     var that = this
-    console.log(that.data.setGroup.data.gid, 'gid')
     if (that.data.setGroup.data.gid == '') {
       wx.showToast({
         title: '请选择组',
@@ -301,8 +305,6 @@ Page({
         cardcasedata: that.data.cardcasedata
       })
     }
-
-
   },
   //移动某个分组
   selectGroup: function (e) {
@@ -331,12 +333,13 @@ Page({
         id: e.currentTarget.dataset.id
       }
     }
-    app.postData(data, function (res) {
-      wx.showModal({
-        title: '提示',
-        content: '是否确认删除',
-        success: function (res) {
-          if (res.confirm) {
+
+    wx.showModal({
+      title: '提示',
+      content: '是否确认删除  "' + e.currentTarget.dataset.name + '" ?',
+      success: function (res) {
+        if (res.confirm) {
+          app.postData(data, function (res) {
             wx.showToast({
               title: '删除成功',
               icon: 'success',
@@ -349,19 +352,18 @@ Page({
                 })
               }
             })
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
-      })
+      }
     })
   },
   //添加分组
   addGroup: function () {
-
     var that = this
     that.setData({
-      isaddgroupinput: !that.data.isaddgroupinput
+      isaddgroupinput: false
     })
   },
   //获取 新增分组名称
@@ -379,7 +381,7 @@ Page({
         app.getData(that.data.cardgroup.url, function (res2) {
           that.setData({
             'cardgroup.data': res2.data,
-            isaddgroupinput: !that.data.isaddgroupinput
+            isaddgroupinput: true
           })
         })
       })
@@ -390,20 +392,26 @@ Page({
         duration: 2000,
         complete: function () {
           that.setData({
-            isaddgroupinput: !that.data.isaddgroupinput
+            isaddgroupinput: true
           })
         }
       })
     }
   },
-
+  setDddGroupName: function (e) {
+    var that = this
+    that.setData({
+      isaddgroupinput: true
+    })
+  },
   //滑动开始
   handleStart: function (e) {
     var that = this
     if (that.data.userCardData.data.sortType == 3 && that.data.isselecgroup) {
       if (e.currentTarget.dataset.name != '公司资源') {
         that.setData({
-          touchDot: e.touches[0].pageX
+          touchDotX: e.touches[0].pageX,
+          touchDotY: e.touches[0].pageY
         })
       }
     }
@@ -412,10 +420,18 @@ Page({
   //滑动过程中
   handleMove: function (e) {
     var that = this
+
     if (that.data.userCardData.data.sortType == 3 && that.data.isselecgroup) {
       if (e.currentTarget.dataset.name != '公司资源') {
-        var touchMove = e.touches[0].pageX
-        if (touchMove > that.data.touchDot) {
+        var touchMoveX = e.touches[0].pageX,
+          touchMoveY = e.touches[0].pageY,
+
+
+          X = touchMoveX - that.data.touchDotX,
+          Y = touchMoveY - that.data.touchDotY
+
+        if (Math.abs(X) > Math.abs(Y) && X > 0) {
+          // right alert('向右')
           that.data.cardcasedata.map(function (v, i) {
             v.items.map(function (v2, i2) {
               if (v2.id === e.currentTarget.dataset.id) {
@@ -428,19 +444,23 @@ Page({
             cardcasedata: that.data.cardcasedata
           })
         }
-        if (touchMove < that.data.touchDot) {
-          that.data.cardcasedata.map(function (v, i) {
-            v.items.map(function (v2, i2) {
-              v2.radio = false
-              if (v2.id === e.currentTarget.dataset.id) {
-                v2.radio = true
-              }
+
+        if (Math.abs(X) > Math.abs(Y) && X < 0) {
+          // right alert('向左')
+          if (X < -50) {
+            that.data.cardcasedata.map(function (v, i) {
+              v.items.map(function (v2, i2) {
+                v2.radio = false
+                if (v2.id === e.currentTarget.dataset.id) {
+                  v2.radio = true
+                }
+              })
             })
-          })
-          that.setData({
-            ismovebtn: true,
-            cardcasedata: that.data.cardcasedata
-          })
+            that.setData({
+              ismovebtn: true,
+              cardcasedata: that.data.cardcasedata
+            })
+          }
         }
       }
     }
@@ -474,5 +494,4 @@ Page({
   canvasIdErrorCallback: function (e) {
     console.error(e.detail.errMsg)
   },
-
 })

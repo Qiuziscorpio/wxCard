@@ -17,24 +17,38 @@
           </view>
         </view>
         <view class="card-content">
-          <view class="phone">
-            <text wx:if="{{itemName.mobileVerify}}" class="iconfont icon-shoujiyanzheng green"></text>
-            <text wx:else class="gray iconfont icon-shoujiyanzheng "></text>
-            {{itemName.mobile}}
-          </view>
-          <view class="name ">
+          <view>
+            <view class="phone">
+              <text wx:if="{{itemName.mobileVerify}}" class="iconfont icon-shoujiyanzheng green"></text>
+              <text wx:else class="gray3 iconfont icon-shoujiyanzheng "></text>
+              {{itemName.mobile}}
+            </view>
+            <view class="name ">
 
-            <!--<text wx:if="{{itemName.companyVerify}} " class="green iconfont icon-yanzheng "></text>-->
+              <!--<text wx:if="{{itemName.companyVerify}} " class="green iconfont icon-yanzheng "></text>-->
 
-            <!--<text wx:else class="iconfont icon-yanzheng "></text>-->
-            {{itemName.companyName}}
-          </view>
-          <view class="customcontent gray4" wx:if="{{itemName.more==''}}">
+              <!--<text wx:else class="iconfont icon-yanzheng "></text>-->
+            </view>
+            <view wx:if="{{itemName.companyName!=''}}">
+              <text class="gray3  iconfont icon-yanzheng" wx:if="{{itemName.companyVerify}}"></text>
+              <text class="gray3 iconfont icon-yanzheng" wx:else></text>
+              {{itemName.companyName}}
+            </view>
+            <view class="gray4" wx:else>
+              <text class="gray3 iconfont icon-yanzheng" wx:if="{{itemName.companyVerify}}"></text>
+              <text class=" iconfont icon-yanzheng" wx:else></text>
+              <text wx:if="{{itemName.language==0}}"> 公司保密</text>
+              <text wx:else> company is classified</text>
+            </view>
+
+            <!--<view class="customcontent gray4" wx:if="{{itemName.more==''}}">
             没有更多介绍
           </view>
           <view class="customcontent gray4" wx:else>
             {{itemName.more}}
+          </view>-->
           </view>
+
         </view>
       </view>
     </navigator>

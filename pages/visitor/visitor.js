@@ -3,6 +3,7 @@ var app = getApp()
 Page({
   data: {
     customData: {},
+    showToast: false,
     getCustomData: {
       'url': 'Card/GetCustomList',
       'data': {
@@ -24,7 +25,8 @@ Page({
     })
     app.postData(that.data.getCustomData, function (res) {
       that.setData({
-        customData: res.data
+        customData: res.data,
+        showToast: false
       })
       wx.stopPullDownRefresh()
     })
@@ -32,7 +34,30 @@ Page({
   //上拉加载分页数据
   onReachBottom: function () {
     var that = this
-    that.getCustomList(that, ++that.data.getCustomData.data.page)
+    //that.getCustomList(that, ++that.data.getCustomData.data.page)
+    that.setData({
+      'getCustomData.data.page': ++that.data.getCustomData.data.page
+    })
+    if (that.data.showToast) {
+    } else {
+      app.postData(that.data.getCustomData, function (res) {
+        if (res.data.length === 0) {
+          wx.showToast({
+            title: '没有更多内容了',
+            icon: 'success',
+            duration: 2000
+          })
+          that.setData({
+            showToast: true
+          })
+        } else {
+          that.setData({
+            customData: that.data.customData.concat(res.data)
+          })
+        }
+      })
+    }
+
   },
   //获取访客列表数据
   getCustomList: function (that, page) {

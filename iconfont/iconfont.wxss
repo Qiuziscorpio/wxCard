@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'iconfont';  /* project id 258244 */
-  src: url('//at.alicdn.com/t/font_qvp0wn2gmpjy8pvi.eot');
-  src: url('//at.alicdn.com/t/font_qvp0wn2gmpjy8pvi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_qvp0wn2gmpjy8pvi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_qvp0wn2gmpjy8pvi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_qvp0wn2gmpjy8pvi.svg#iconfont') format('svg');
+  font-family: 'iconfont'; /* project id 258244 */
+  src: url('//at.alicdn.com/t/font_ayw1yf3vu7lul3di.eot');
+  src: url('//at.alicdn.com/t/font_ayw1yf3vu7lul3di.eot?#iefix') format('embedded-opentype'),
+         url('//at.alicdn.com/t/font_ayw1yf3vu7lul3di.woff') format('woff'),
+         url('//at.alicdn.com/t/font_ayw1yf3vu7lul3di.ttf') format('truetype'),
+         url('//at.alicdn.com/t/font_ayw1yf3vu7lul3di.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -111,6 +111,14 @@
   content: "\e629";
 }
 
+.icon-youcexiaochengxuerweima:before {
+  content: "\e62a";
+}
+
+.icon-xiaochengxu:before {
+  content: "\e640";
+}
+
 .icon-zhongyingwenqiehuan-xianshizhongyingwen:before {
   content: "\e61e";
 }
@@ -123,10 +131,18 @@
   content: "\e689";
 }
 
-.icon-arrows_circle_remove:before {
-  content: "\e68b";
-}
-
 .icon-gongsi:before {
   content: "\e615";
+}
+
+.icon-angle-right:before {
+  content: "\e60d";
+}
+
+.icon-angle-left:before {
+  content: "\e60e";
+}
+
+.icon-arrows_circle_remove1:before {
+  content: "\e647";
 }

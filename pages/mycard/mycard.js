@@ -12,31 +12,63 @@ Page({
       { name: 'TUR', value: '法国' },
     ],
     cardDataUrl: 'Card/GetAllCard',
-    cardData: []
+    cardData: [],
+    currenttab: 0,
+    isslide: false,
+    indicatorDots: true,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000
   },
+
+  changeIndicatorDots: function (e) {
+    this.setData({
+      indicatorDots: !this.data.indicatorDots
+    })
+  },
+  changeAutoplay: function (e) {
+    this.setData({
+      autoplay: !this.data.autoplay
+    })
+  },
+  intervalChange: function (e) {
+    this.setData({
+      interval: e.detail.value
+    })
+  },
+  durationChange: function (e) {
+    this.setData({
+      duration: e.detail.value
+    })
+  },
+
   getCardData: function () {
     //获取我的名片数据
     var that = this
     app.getData(that.data.cardDataUrl, function (res) {
       if (res.data.length == 0) {
-        wx.showModal({
-          title: '请创建名片',
-          showCancel: false,
-          content: '至少创建一张名片才能正常使用哦~',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '../createcard/createcard?id=0'
-              })
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
+        that.setData({
+          isslide: true
         })
+        // wx.showModal({
+        //   title: '请创建名片',
+        //   showCancel: false,
+        //   content: '至少创建一张名片才能正常使用哦~',
+        //   success: function (res) {
+        //     if (res.confirm) {
+        //       wx.navigateTo({
+        //         url: '../createcard/createcard?id=0'
+        //       })
+        //     } else if (res.cancel) {
+        //       console.log('用户点击取消')
+        //     }
+        //   }
+        // }) 
       }
       that.setData({
-        cardData: res.data
+        cardData: res.data,
       })
+
     })
   },
   openCreatecard: function () {
@@ -66,9 +98,7 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-
     var that = this
-
     app.getLogiCallback('', function () {
       that.getCardData()
     })
