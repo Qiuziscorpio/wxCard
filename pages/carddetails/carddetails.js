@@ -267,6 +267,8 @@ Page({
     var that = this
     if (options.q) {
       var src = decodeURIComponent(options.q)
+
+      console.log(options.q)
       src.match(/id=(\S*)&share=1/)[1]
       that.setData({
         'cardDetails.data.id': src.match(/id=(\S*)&share=1/)[1],
